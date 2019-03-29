@@ -1,7 +1,7 @@
 
 public class BST<T> {
 	
-	private Node root;
+	private Node<T> root;
 	
 	public BST() {
 		root = null;
