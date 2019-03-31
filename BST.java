@@ -1,5 +1,5 @@
 
-public class BST<T> {
+public class BST<T extends Comparable<T>> {
 	
 	private Node<T> root;
 	
@@ -8,19 +8,35 @@ public class BST<T> {
 		
 	}
 	
-	public boolean find(Comparable<T> value) {
-		
-		return false;
+	public boolean find(T value) {
+		return find(root, value);
 		
 	}
 	
-	public void insert(Comparable<T> value) {
+	private boolean find(Node<T> root, T value) {
+		if (root == null) {
+			return false;
+		}
+		
+		if (root.data.compareTo(value) == 0) {
+			return true;
+		}
+		
+		if (root.data.compareTo(value) < 0) {
+			return find(root.left, value);
+		} else {
+			return find(root.right, value);
+			
+		}		
+	}
+	
+	public void insert(T value) {
 		root = insert(root, value);
 	}
 	
-	public Node<T> insert(Node<T> root, Comparable<T> value) {
+	private Node<T> insert(Node<T> root, T value) {
 		if (root == null) {
-			root = new Node(value);
+			root = new Node<T>(value);
 			return root;
 		}
 		
