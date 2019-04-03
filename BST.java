@@ -10,7 +10,6 @@ public class BST<T extends Comparable<T>> {
 	
 	public boolean find(T value) {
 		return find(root, value);
-		
 	}
 	
 	private boolean find(Node<T> root, T value) {
@@ -18,20 +17,19 @@ public class BST<T extends Comparable<T>> {
 			return false;
 		}
 		
-		if (root.data.compareTo(value) == 0) {
+		if (value.compareTo(root.data) == 0) {
 			return true;
 		}
 		
-		if (root.data.compareTo(value) < 0) {
+		if (value.compareTo(root.data) < 0) {
 			return find(root.left, value);
 		} else {
 			return find(root.right, value);
-			
 		}		
 	}
 	
 	public void insert(T value) {
-		root = insert(root, value);
+		root = insert(this.root, value);
 	}
 	
 	private Node<T> insert(Node<T> root, T value) {
@@ -56,5 +54,4 @@ public class BST<T extends Comparable<T>> {
 	public void print() {
 		
 	}
-	
 }
