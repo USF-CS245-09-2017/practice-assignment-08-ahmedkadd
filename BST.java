@@ -5,7 +5,6 @@ public class BST<T extends Comparable<T>> {
 	
 	public BST() {
 		root = null;
-		
 	}
 	
 	public boolean find(T value) {
@@ -34,8 +33,7 @@ public class BST<T extends Comparable<T>> {
 	
 	private Node<T> insert(Node<T> root, T value) {
 		if (root == null) {
-			root = new Node<T>(value);
-			return root;
+			return new Node<T>(value);
 		}
 		
 		if (value.compareTo(root.data) < 0) {
@@ -47,8 +45,48 @@ public class BST<T extends Comparable<T>> {
 		return root;
 	}
 	
-	public void delete(Comparable<T> value) {
+	public void delete(T value) {
+		root = delete(this.root, value);
+	}
+	
+	private Node<T> delete(Node<T> root, T value) {
+		if (root == null) {
+			return null;
+		}
 		
+		if (value.compareTo(root.data) == 0) {
+			
+			if (root.left == null) {
+				return root.right;
+			} else if (root.right == null) {
+				return root.left;
+			}
+			
+			root.data = findSmallestChild(root.right);
+			
+			delete(root.right, root.data);
+		}
+		
+		if (value.compareTo(root.data) < 0) {
+			root.left = delete(root.left, value);
+		} else {
+			root.right = delete(root.right, value);
+		}
+		
+		return root;
+	}
+	
+	private T findSmallestChild(Node<T> root) {
+		T min = root.data;
+		
+		while (root.left != null) {
+			if (root.left.data.compareTo(min) < 0) {
+				min = root.left.data;
+				root = root.left;
+			}
+		}
+		
+		return min;
 	}
 	
 	public void print() {
