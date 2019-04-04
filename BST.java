@@ -16,11 +16,11 @@ public class BST<T extends Comparable<T>> {
 			return false;
 		}
 		
-		if (value.compareTo(root.data) == 0) {
+		if (value.compareTo(root.getData()) == 0) {
 			return true;
 		}
 		
-		if (value.compareTo(root.data) < 0) {
+		if (value.compareTo(root.getData()) < 0) {
 			return find(root.left, value);
 		} else {
 			return find(root.right, value);
@@ -36,9 +36,9 @@ public class BST<T extends Comparable<T>> {
 			return new Node<T>(value);
 		}
 		
-		if (value.compareTo(root.data) < 0) {
+		if (value.compareTo(root.getData()) < 0) {
 			root.left = insert(root.left, value);
-		} else if (value.compareTo(root.data) > 0) {
+		} else if (value.compareTo(root.getData()) > 0) {
 			root.right = insert(root.right, value);
 		}
 		
@@ -54,7 +54,7 @@ public class BST<T extends Comparable<T>> {
 			return null;
 		}
 		
-		if (value.compareTo(root.data) == 0) {
+		if (value.compareTo(root.getData()) == 0) {
 			
 			if (root.left == null) {
 				return root.right;
@@ -62,12 +62,12 @@ public class BST<T extends Comparable<T>> {
 				return root.left;
 			}
 			
-			root.data = findSmallestChild(root.right);
+			root.setData(findSmallestChild(root.right)); 
 			
-			delete(root.right, root.data);
+			delete(root.right, root.getData());
 		}
 		
-		if (value.compareTo(root.data) < 0) {
+		if (value.compareTo(root.getData()) < 0) {
 			root.left = delete(root.left, value);
 		} else {
 			root.right = delete(root.right, value);
@@ -77,11 +77,11 @@ public class BST<T extends Comparable<T>> {
 	}
 	
 	private T findSmallestChild(Node<T> root) {
-		T min = root.data;
+		T min = root.getData();
 		
 		while (root.left != null) {
-			if (root.left.data.compareTo(min) < 0) {
-				min = root.left.data;
+			if (root.left.getData().compareTo(min) < 0) {
+				min = root.left.getData();
 				root = root.left;
 			}
 		}
@@ -96,8 +96,21 @@ public class BST<T extends Comparable<T>> {
 	private void print(Node<T> root) {
 		if (root != null) {
 			print(root.left);
-			System.out.println(root.data);
+			System.out.println(root.getData());
 			print(root.right);
 		}
+	}
+	
+	public static void main(String[] args) {
+		BST<Integer> tree = new BST<Integer>();
+		
+		tree.insert(7);
+		tree.insert(2);
+		tree.insert(8);
+		tree.insert(-3);
+		
+		tree.delete(8);
+		
+		tree.print();
 	}
 }

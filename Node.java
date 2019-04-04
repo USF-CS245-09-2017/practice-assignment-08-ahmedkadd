@@ -1,7 +1,7 @@
 
 public class Node<T extends Comparable<T>> {
 	
-	public T data;
+	private T data;
 	public Node<T> left;
 	public Node<T> right;
 	
@@ -10,5 +10,12 @@ public class Node<T extends Comparable<T>> {
 		this.left = null;
 		this.right = null;
 	}
-
+	
+	public T getData() {
+		return this.data;
+	}
+	
+	public void setData(T value) {
+		this.data = value;
+	}
 }
