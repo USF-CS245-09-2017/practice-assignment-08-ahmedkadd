@@ -90,6 +90,14 @@ public class BST<T extends Comparable<T>> {
 	}
 	
 	public void print() {
-		
+		print(this.root);
+	}
+	
+	private void print(Node<T> root) {
+		if (root != null) {
+			print(root.left);
+			System.out.println(root.data);
+			print(root.right);
+		}
 	}
 }
